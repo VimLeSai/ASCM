@@ -1,14 +1,21 @@
 {
+  "name": "ascm-dashboard",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
+  "author": "VimLeSai <desai.vimal250@gmail.com>",
   "dependencies": {
+    "highcharts": "^10.2.1",
+    "highcharts-react-official": "^3.1.0",
     "next": "latest",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-countup": "^6.3.1",
+    "react-dom": "18.1.0",
+    "swr": "^1.3.0",
+    "typeorm": "^0.3.9"
   },
   "devDependencies": {
     "@types/node": "17.0.35",

@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "components/*": ["./components/*"],
+      "shared/*": ["./shared/*"],
+      "widgets/*": ["./widgets/*"],
+      "icons/*": ["./icons/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
