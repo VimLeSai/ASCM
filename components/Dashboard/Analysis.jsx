@@ -21,7 +21,7 @@ const Analysis = () => {
 
   return (
     <>
-      <div className="relative flex items-center justify-between max-w-full">
+      <div className="relative flex items-center justify-between max-w-full px-1">
         <ButtonSwitch
           type={type}
           TYPES={TYPES}
@@ -85,7 +85,7 @@ const Analysis = () => {
           </ul>
         </div>
       </div>
-      <div className="w-full h-96">
+      <div className="w-full mx-2 mt-6 mb-3 h-96 rounded-xl">
         {Boolean(type === TYPES.bar) ? <BarChart /> : <LineChart />}
       </div>
     </>

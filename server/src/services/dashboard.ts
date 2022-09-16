@@ -8,11 +8,14 @@ export const list = (req: Request, res: Response) => {
 };
 
 export const counts = async (req: Request, res: Response) => {
-  const queryForTotal = AppDataSource.getRepository(ascmfeed_v2)
+  const ascmFeedRepo = AppDataSource.getRepository(ascmfeed_v2);
+  const ascmCountsRepo = AppDataSource.getRepository(ascmcounts);
+
+  const queryForTotal = ascmFeedRepo
     .createQueryBuilder(ascmfeed_v2.name)
     .select("COUNT(*)", "count");
 
-  const queryForSubmitted = AppDataSource.getRepository(ascmcounts)
+  const queryForSubmitted = ascmCountsRepo
     .createQueryBuilder(ascmcounts.name)
     .select("COUNT(*)", "count");
 
@@ -21,7 +24,23 @@ export const counts = async (req: Request, res: Response) => {
     .getRawOne()
     .then((r) => r.count);
 
+  const headCounts = await ascmFeedRepo.find({
+    take: 10,
+    select: {
+      count: true,
+    },
+  });
+
+  const surveyCounts = await ascmCountsRepo
+    .createQueryBuilder(ascmcounts.name)
+    .select("max(submit_date)", "session_start_date")
+    .select("count(id)", "count")
+    .groupBy("minute(submit_date)")
+    .getRawMany();
+
   res.json({
+    headCounts: headCounts.map((d) => d.count),
+    surveyCounts: surveyCounts.map((d) => Number(d.count)).splice(0, 10),
     total: Number(totalRecords),
     submitted: Number(totalSubmittedRecords),
     submittedPercentage: Number(

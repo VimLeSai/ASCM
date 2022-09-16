@@ -8,7 +8,7 @@ const options = {
     // type: "spline",
   },
   title: {
-    text: "USD to EUR exchange rate over time",
+    text: "",
   },
   xAxis: {
     // type: "datetime",
@@ -16,39 +16,9 @@ const options = {
   },
   yAxis: {
     title: {
-      text: "Exchange rate",
+      text: null,
     },
   },
-  //   legend: {
-  //     enabled: false,
-  //   },
-  //   plotOptions: {
-  //     area: {
-  //       fillColor: {
-  //         linearGradient: {
-  //           x1: 0,
-  //           y1: 0,
-  //           x2: 0,
-  //           y2: 1,
-  //         },
-  //         stops: [
-  //           [0, "red"],
-  //           [1, "pink"],
-  //         ],
-  //       },
-  //       marker: {
-  //         radius: 2,
-  //       },
-  //       lineWidth: 1,
-  //       states: {
-  //         hover: {
-  //           lineWidth: 1,
-  //         },
-  //       },
-  //       threshold: null,
-  //     },
-  //   },
-
   series: [
     {
       type: "area",

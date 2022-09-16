@@ -7,13 +7,14 @@ const options = {
     type: "column",
   },
   title: {
-    text: "Major trophies for some English teams",
+    enabled: null,
+    text: "",
     align: "center",
   },
   yAxis: {
     min: 0,
     title: {
-      text: "Count trophies",
+      text: "",
     },
     stackLabels: {
       enabled: true,
@@ -24,8 +25,11 @@ const options = {
     },
   },
   tooltip: {
-    headerFormat: "<b>{point.x}</b><br/>",
+    headerFormat: "<b>Analysis</b><br/>",
     pointFormat: "{series.name}: {point.y}<br/>Total: {point.stackTotal}",
+  },
+  legend: {
+    enabled: false,
   },
   plotOptions: {
     column: {
@@ -39,16 +43,12 @@ const options = {
   },
   series: [
     {
-      name: "BPL",
+      name: "Visitors",
       data: [3, 5, 1, 13, 2, 5, 12, 13, 2, 12, 4, 21, 5, 2, 5, 3, 1, 6],
     },
     {
-      name: "FA Cup",
+      name: "Form Submitted",
       data: [14, 8, 8, 12, 3, 5, 3, 12, 4, 12, 4, 12, 42, 12, 4, 2, 2, 2],
-    },
-    {
-      name: "CL",
-      data: [0, 2, 6, 3, 23, 2, 23, 34, 12, 4, 3, 23, 4, 5, 3, 2, 5, 3, 9],
     },
   ],
 };

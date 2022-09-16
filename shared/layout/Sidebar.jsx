@@ -8,7 +8,7 @@ const Sidebar = () => {
       className="w-64 h-full"
       aria-label="Sidebar"
       style={{
-        height: "calc(100vh - 80px)",
+        height: "unset",
         minWidth: "256px",
       }}
     >
