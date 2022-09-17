@@ -8,7 +8,7 @@ const TYPES = {
   line: "LINE",
 };
 
-const Analysis = () => {
+const Analysis = ({ data }) => {
   const [type, setType] = useState(TYPES.bar);
 
   const handleBarToLine = () => {
@@ -86,7 +86,11 @@ const Analysis = () => {
         </div>
       </div>
       <div className="w-full mx-2 mt-6 mb-3 h-96 rounded-xl">
-        {Boolean(type === TYPES.bar) ? <BarChart /> : <LineChart />}
+        {Boolean(type === TYPES.bar) ? (
+          <BarChart data={data} />
+        ) : (
+          <LineChart data={data} />
+        )}
       </div>
     </>
   );

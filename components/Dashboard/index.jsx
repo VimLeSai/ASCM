@@ -8,6 +8,9 @@ const Dashboard = () => {
   const { data = {}, error } = useSWR("/dashboard/counts", fetcher, {
     refreshInterval: 1e3 * 1,
   });
+  const { data: chart = [] } = useSWR("/dashboard/chart", fetcher, {
+    refreshInterval: 1e3 * 1,
+  });
 
   return (
     <main
@@ -16,7 +19,7 @@ const Dashboard = () => {
         maxWidth: "calc(100vw - 256px)",
       }}
     >
-      <Analysis />
+      <Analysis data={chart} />
       <div className="grid items-center w-full grid-cols-1 gap-3 m-auto mt-5 lg:gap-4 md:grid-cols-2 lg:grid-cols-3 ">
         <CountCard
           label="Number of Visitors"

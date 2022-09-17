@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { list, counts } from "../../../services/dashboard";
+import { counts, list } from "../../../services/dashboard";
 
 const routes = Router();
-routes.get("/list", list);
+routes.get("/chart", list);
 routes.get("/counts", counts);
 
 export default routes;

@@ -2,7 +2,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import React from "react";
 
-const options = {
+const options = (data) => ({
   chart: {
     type: "column",
   },
@@ -44,19 +44,19 @@ const options = {
   series: [
     {
       name: "Visitors",
-      data: [3, 5, 1, 13, 2, 5, 12, 13, 2, 12, 4, 21, 5, 2, 5, 3, 1, 6],
+      data: data.map((x) => x.head),
     },
     {
       name: "Form Submitted",
-      data: [14, 8, 8, 12, 3, 5, 3, 12, 4, 12, 4, 12, 42, 12, 4, 2, 2, 2],
+      data: data.map((x) => x.submitted),
     },
   ],
-};
+});
 
-const BarChart = () => {
+const BarChart = ({ data = [] }) => {
   return (
     <>
-      <HighchartsReact highcharts={Highcharts} options={options} />
+      <HighchartsReact highcharts={Highcharts} options={options(data)} />
     </>
   );
 };

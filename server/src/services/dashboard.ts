@@ -1,10 +1,65 @@
-import { AppDataSource } from "./../data-source";
-import { ascmfeed_v2 } from "./../entity/ascmfeed_v2";
-import { ascmcounts } from "./../entity/ascmcounts";
 import { Request, Response } from "express";
+import groupBy from "lodash/groupBy";
+import moment from "moment";
+import { MoreThan } from "typeorm";
+import { AppDataSource } from "./../data-source";
+import { ascmcounts } from "./../entity/ascmcounts";
+import { ascmfeed_v2 } from "./../entity/ascmfeed_v2";
 
-export const list = (req: Request, res: Response) => {
-  res.send("Ok");
+export const list = async (req: Request, res: Response) => {
+  const { interval = "1h" } = req.body || {};
+  const ascmFeedRepo = AppDataSource.getRepository(ascmfeed_v2);
+  const ascmCountsRepo = AppDataSource.getRepository(ascmcounts);
+  let heads = [];
+  let submitted = [];
+  let data = [];
+
+  if (interval === "1h") {
+    heads = await ascmFeedRepo.findBy({
+      // take: 60,
+      index: MoreThan(new Date(moment().subtract("60", "minutes").toString())),
+    });
+
+    if (heads.length === 0) {
+      heads = await ascmFeedRepo.find({
+        take: 60,
+      });
+    }
+
+    submitted = await ascmCountsRepo.findBy({
+      // submit_date: MoreThan(new Date("2022-05-27 06:35:24")),
+      submit_date: MoreThan(
+        new Date(moment().subtract("60", "minutes").toString())
+      ),
+    });
+
+    if (submitted.length === 0) {
+      submitted = await ascmCountsRepo.findBy({
+        submit_date: MoreThan(
+          new Date(
+            moment(heads[heads.length - 1])
+              .subtract("59", "minutes")
+              .toString()
+          )
+        ),
+      });
+    }
+
+    let grp = groupBy(submitted, (x) =>
+      moment(x.submit_date).format("YYYY-MM-DD HH:mm")
+    );
+
+    submitted = Object.entries(grp);
+    data = heads.map((x, i) => {
+      return {
+        date: x.index,
+        head: x.count,
+        submitted: submitted[1]?.length,
+      };
+    });
+  }
+
+  res.status(200).json(data);
 };
 
 export const counts = async (req: Request, res: Response) => {
