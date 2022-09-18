@@ -6,10 +6,10 @@ import { fetcher } from "../../api";
 
 const Dashboard = () => {
   const { data = {}, error } = useSWR("/dashboard/counts", fetcher, {
-    refreshInterval: 1e3 * 1,
+    refreshInterval: 1e3 * 10,
   });
   const { data: chart = [] } = useSWR("/dashboard/chart", fetcher, {
-    refreshInterval: 1e3 * 1,
+    refreshInterval: 1e3 * 10,
   });
 
   return (
