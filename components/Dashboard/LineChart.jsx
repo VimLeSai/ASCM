@@ -1,6 +1,11 @@
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import HighchartsNoData from "highcharts/modules/no-data-to-display";
 import React from "react";
+
+if (typeof Highcharts === "object") {
+  HighchartsNoData(Highcharts);
+}
 
 const options = (data = []) => ({
   chart: {
@@ -22,6 +27,16 @@ const options = (data = []) => ({
       text: null,
     },
   },
+  lang: {
+    noData: "No data to Show",
+  },
+  noData: {
+    style: {
+      fontWeight: "bold",
+      fontSize: "15px",
+      color: "#303030",
+    },
+  },
   series: [
     {
       type: "area",
@@ -29,6 +44,9 @@ const options = (data = []) => ({
       data: data?.map((x) => [x.date, x.head]),
     },
   ],
+  credits: {
+    enabled: false,
+  },
 });
 
 const LineChart = ({ data = [] }) => {

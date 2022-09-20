@@ -28,6 +28,8 @@ function MyApp({ Component, pageProps }) {
         <meta name="application-name" content="muda-management" />
         <meta name="msapplication-TileColor" content="#14293f" />
         <meta name="theme-color" content="#14293f" />
+        {/* <script src="https://code.highcharts.com/highcharts.js"></script> */}
+        {/* <script src="https://code.highcharts.com/modules/no-data-to-display.js"></script> */}
       </Head>
       <Component {...pageProps} />
     </>

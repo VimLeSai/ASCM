@@ -2,6 +2,11 @@ import React from "react";
 import CountUp from "react-countup";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import HighchartsNoData from "highcharts/modules/no-data-to-display";
+
+if (typeof Highcharts === "object") {
+  HighchartsNoData(Highcharts);
+}
 
 const options = ({ data, lineColor, fromColor, toColor }) => ({
   chart: {
@@ -36,6 +41,15 @@ const options = ({ data, lineColor, fromColor, toColor }) => ({
   },
   legend: {
     enabled: false,
+  },
+  lang: {
+    noData: "No data to Show",
+  },
+  noData: {
+    style: {
+      fontSize: "12px",
+      color: "#303030",
+    },
   },
   plotOptions: {
     areaspline: {
