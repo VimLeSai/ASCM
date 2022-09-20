@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "deploy": "pm2 start npm --name 'ascm-front' -- start"
   },
   "author": "VimLeSai <desai.vimal250@gmail.com>",
   "dependencies": {
